@@ -185,8 +185,8 @@ unsafe extern "C" {}
 #[link(name = "unwind", cfg(not(target_feature = "crt-static")))]
 unsafe extern "C" {}
 
-// etos ships a placeholder `libunwind.a` next to mlibc's `libc.a` (no real
-// unwinder yet; its target is `panic=abort`, see `x86_64-unknown-etos`).
+// etos ships LLVM's libunwind as `libunwind.a` next to mlibc's `libc.a`, plus
+// a `dl_iterate_phdr` for static-PIE (mlibc's needs its dynamic linker).
 #[cfg(target_os = "etos")]
 #[link(name = "unwind", kind = "static", modifiers = "-bundle", cfg(target_feature = "crt-static"))]
 unsafe extern "C" {}

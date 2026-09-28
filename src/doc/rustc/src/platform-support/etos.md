@@ -20,11 +20,15 @@ static-PIE ELF executables with no interpreter, and every relocation must be
 only mode and dynamic linking is unavailable.
 
 Linking needs an mlibc sysroot containing `libc.a`, `Scrt1.o`, `crti.o` and
-`crtn.o` (mlibc keeps libm and pthreads inside `libc.a`), plus a `libunwind.a`.
-etos has no unwinder yet, so its sysroot provides a placeholder `libunwind.a`
-that reports an empty stack, and the target uses `panic=abort`. The linker is
-`clang` driving `rust-lld` (`gnu-lld-cc`); pass the sysroot with
-`-C link-arg=-L<sysroot>/usr/lib`.
+`crtn.o` (mlibc keeps libm and pthreads inside `libc.a`), plus `libunwind.a`.
+Unwinding is LLVM's libunwind, built for etos and installed in the sysroot; it
+finds unwind tables through `.eh_frame_hdr` (the target links with
+`--eh-frame-hdr`) and needs a `dl_iterate_phdr` that works in a static-PIE, which
+the sysroot's `libunwind.a` also provides because mlibc's only works through its
+dynamic linker. The linker is `clang` driving `rust-lld` (`gnu-lld-cc`); pass the
+sysroot with `-C link-arg=-L<sysroot>/usr/lib`. Undefined weak symbols are linked
+as null rather than given dynamic relocations, since etos's loader applies only
+`R_X86_64_RELATIVE`.
 
 ## Building
 
@@ -55,8 +59,10 @@ reports as `ErrorKind::Unsupported`. Details that differ from other Unix targets
 - Random data comes from `getentropy`. mlibc's etos port does not implement
   `sys_getentropy` yet, so `std::random` panics, and `HashMap` seeding falls
   back to a weak address/clock-derived seed rather than aborting.
-- Backtraces are empty and `panic=unwind` is unavailable until a real unwinder
-  (LLVM's libunwind) is ported.
+- Panics unwind (`panic=unwind` is the default) and `catch_unwind` works, and
+  `std::backtrace` captures frames. Symbol names need debug info or a symbol
+  table, which the etos build strips; mlibc also prints a missing-sysdep notice
+  for `getcwd`, which the backtrace code calls.
 
 ## Testing
 
