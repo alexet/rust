@@ -107,6 +107,7 @@ pub fn bar() {}
     target_os = "lynxos178",
     target_os = "macos",
     target_os = "managarm",
+    target_os = "etos",
     target_os = "motor",
     target_os = "netbsd",
     target_os = "none",

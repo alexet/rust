@@ -709,6 +709,9 @@
 //@ revisions: x86_64_unknown_freebsd
 //@ [x86_64_unknown_freebsd] compile-flags: --target x86_64-unknown-freebsd
 //@ [x86_64_unknown_freebsd] needs-llvm-components: x86
+//@ revisions: x86_64_unknown_etos
+//@ [x86_64_unknown_etos] compile-flags: --target x86_64-unknown-etos
+//@ [x86_64_unknown_etos] needs-llvm-components: x86
 //@ revisions: x86_64_unknown_fuchsia
 //@ [x86_64_unknown_fuchsia] compile-flags: --target x86_64-unknown-fuchsia
 //@ [x86_64_unknown_fuchsia] needs-llvm-components: x86

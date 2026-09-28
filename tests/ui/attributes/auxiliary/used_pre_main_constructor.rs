@@ -22,6 +22,7 @@
         target_os = "openbsd",
         target_os = "fuchsia",
         target_os = "managarm",
+        target_os = "etos",
         target_family = "wasm",
     ),
     link_section = ".init_array"

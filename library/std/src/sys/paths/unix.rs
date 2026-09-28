@@ -365,6 +365,13 @@ pub fn current_exe() -> io::Result<PathBuf> {
     crate::fs::read_to_string("sys:exe").map(PathBuf::from)
 }
 
+// etos has no procfs, and an executable is loaded from a capability rather
+// than a path, so the kernel has no path to report.
+#[cfg(target_os = "etos")]
+pub fn current_exe() -> io::Result<PathBuf> {
+    Err(io::const_error!(io::ErrorKind::Unsupported, "current_exe is not available on etos"))
+}
+
 #[cfg(target_os = "l4re")]
 pub fn current_exe() -> io::Result<PathBuf> {
     Err(io::const_error!(io::ErrorKind::Unsupported, "not yet implemented!"))

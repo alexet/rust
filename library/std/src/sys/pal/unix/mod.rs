@@ -79,6 +79,7 @@ pub unsafe fn init(argc: isize, argv: *const *const u8, sigpipe: u8) {
             target_os = "fuchsia",
             target_os = "vxworks",
             target_os = "redox",
+            target_os = "etos",
             target_os = "l4re",
             target_os = "horizon",
             target_os = "vita",
@@ -122,6 +123,8 @@ pub unsafe fn init(argc: isize, argv: *const *const u8, sigpipe: u8) {
         // fallback in case poll isn't available or limited by RLIMIT_NOFILE
         #[cfg(not(any(
             target_os = "emscripten",
+            // etos: fds 0-2 are always the process's stdio capabilities.
+            target_os = "etos",
             target_os = "fuchsia",
             target_os = "vxworks",
             target_os = "l4re",
@@ -146,6 +149,8 @@ pub unsafe fn init(argc: isize, argv: *const *const u8, sigpipe: u8) {
             target_os = "vxworks",
             target_os = "vita",
             target_os = "l4re",
+            // etos has no signals to set a disposition for.
+            target_os = "etos",
             // Unikraft's `signal` implementation is currently broken:
             // https://github.com/unikraft/lib-musl/issues/57
             target_vendor = "unikraft",

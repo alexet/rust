@@ -88,3 +88,7 @@ rustc-std-workspace-std = { path = 'rustc-std-workspace-std' }
 
 # See comments in `library/windows-sys/Cargo.toml` for why this is patched
 windows-sys = { path = 'windows-sys' }
+
+# etos has no bindings in upstream `libc` yet; use the fork that adds them.
+# Drop this once `target_os = "etos"` lands upstream.
+libc = { git = "https://github.com/alexet/rust-libc", branch = "etos" }

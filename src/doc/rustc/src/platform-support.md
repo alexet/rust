@@ -458,6 +458,7 @@ target | std | host | notes
 [`x86_64-pc-qnx`](platform-support/nto-qnx.md) | ✓ |  | x86 64-bit QNX SDP 8.0+ |
 [`x86_64-unikraft-linux-musl`](platform-support/unikraft-linux-musl.md) | ✓ |  | 64-bit Unikraft with musl 1.2.5
 `x86_64-unknown-dragonfly` | ✓ | ✓ | 64-bit DragonFlyBSD
+[`x86_64-unknown-etos`](platform-support/etos.md) | ✓ |  | etos (x86_64, mlibc)
 `x86_64-unknown-haiku` | ✓ | ✓ | 64-bit Haiku
 [`x86_64-unknown-hermit`](platform-support/hermit.md) | ✓ |  | x86_64 Hermit
 [`x86_64-unknown-helenos`](platform-support/helenos.md) | ✓ |  | x86_64 (amd64) HelenOS

@@ -1444,6 +1444,8 @@ supported_targets! {
     ("riscv64gc-unknown-redox", riscv64gc_unknown_redox),
     ("x86_64-unknown-redox", x86_64_unknown_redox),
 
+    ("x86_64-unknown-etos", x86_64_unknown_etos),
+
     ("x86_64-unknown-managarm-mlibc", x86_64_unknown_managarm_mlibc),
     ("aarch64-unknown-managarm-mlibc", aarch64_unknown_managarm_mlibc),
     ("riscv64gc-unknown-managarm-mlibc", riscv64gc_unknown_managarm_mlibc),
@@ -1850,6 +1852,7 @@ crate::target_spec_enum! {
         Dragonfly = "dragonfly",
         Emscripten = "emscripten",
         EspIdf = "espidf",
+        Etos = "etos",
         FreeBsd = "freebsd",
         Fuchsia = "fuchsia",
         Haiku = "haiku",

@@ -134,6 +134,7 @@
     - [\*-unknown-helenos](platform-support/helenos.md)
     - [\*-unknown-hermit](platform-support/hermit.md)
     - [\*-unknown-freebsd](platform-support/freebsd.md)
+    - [x86_64-unknown-etos](platform-support/etos.md)
     - [\*-unknown-managarm-mlibc](platform-support/managarm.md)
     - [\*-unknown-motor](platform-support/motor.md)
     - [\*-unknown-netbsd\*](platform-support/netbsd.md)

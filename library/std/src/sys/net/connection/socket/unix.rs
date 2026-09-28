@@ -592,7 +592,12 @@ impl Socket {
         Ok(local_creds_persistent != 0)
     }
 
-    #[cfg(not(any(target_os = "solaris", target_os = "illumos", target_os = "vita")))]
+    #[cfg(not(any(
+        target_os = "solaris",
+        target_os = "illumos",
+        target_os = "vita",
+        target_os = "etos"
+    )))]
     pub fn set_nonblocking(&self, nonblocking: bool) -> io::Result<()> {
         let mut nonblocking = nonblocking as libc::c_int;
         cvt(unsafe { libc::ioctl(self.as_raw_fd(), libc::FIONBIO, &mut nonblocking) }).map(drop)
@@ -604,10 +609,11 @@ impl Socket {
         unsafe { setsockopt(self, libc::SOL_SOCKET, libc::SO_NONBLOCK, option) }
     }
 
-    #[cfg(any(target_os = "solaris", target_os = "illumos"))]
+    #[cfg(any(target_os = "solaris", target_os = "illumos", target_os = "etos"))]
     pub fn set_nonblocking(&self, nonblocking: bool) -> io::Result<()> {
-        // FIONBIO is inadequate for sockets on illumos/Solaris, so use the
-        // fcntl(F_[GS]ETFL)-based method provided by FileDesc instead.
+        // FIONBIO is inadequate for sockets on illumos/Solaris, and mlibc has
+        // no `ioctl` at all (etos), so use the fcntl(F_[GS]ETFL)-based method
+        // provided by FileDesc instead.
         self.0.set_nonblocking(nonblocking)
     }
 

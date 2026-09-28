@@ -3,6 +3,7 @@
     target_os = "l4re",
     target_os = "emscripten",
     target_os = "redox",
+    target_os = "etos",
     target_os = "hurd",
     target_os = "aix",
     target_os = "wasi",
@@ -166,6 +167,7 @@ pub fn available_parallelism() -> io::Result<NonZero<usize>> {
             target_vendor = "apple",
             target_os = "cygwin",
             target_os = "redox",
+            target_os = "etos",
             target_os = "wasi",
         ) => {
             #[allow(unused_assignments)]

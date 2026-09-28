@@ -53,6 +53,10 @@ cfg_select! {
         mod unix_legacy;
         pub use unix_legacy::fill_bytes;
     }
+    target_os = "etos" => {
+        mod etos;
+        pub use etos::{fill_bytes, hashmap_random_keys};
+    }
     target_os = "redox" => {
         mod redox;
         pub use redox::fill_bytes;
@@ -114,6 +118,7 @@ cfg_select! {
 #[cfg(not(any(
     target_os = "linux",
     target_os = "android",
+    target_os = "etos",
     all(target_family = "wasm", target_os = "unknown"),
     all(target_os = "wasi", not(target_env = "p1")),
     target_os = "xous",

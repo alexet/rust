@@ -52,6 +52,8 @@ mod platform {
     pub use crate::os::emscripten::*;
     #[cfg(target_os = "espidf")]
     pub use crate::os::espidf::*;
+    #[cfg(target_os = "etos")]
+    pub use crate::os::etos::*;
     #[cfg(target_os = "freebsd")]
     pub use crate::os::freebsd::*;
     #[cfg(target_os = "fuchsia")]

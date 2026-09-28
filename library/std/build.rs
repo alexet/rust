@@ -38,6 +38,7 @@ fn main() {
         || target_os == "trusty"
         || target_os == "l4re"
         || target_os == "redox"
+        || target_os == "etos"
         || target_os == "haiku"
         || target_os == "vxworks"
         || target_arch == "wasm32"
