@@ -56,9 +56,11 @@ reports as `ErrorKind::Unsupported`. Details that differ from other Unix targets
   etos has neither.
 - `std::env::current_exe` returns `Unsupported`.
 - Thread names are not passed to the OS.
-- Random data comes from `getentropy`. mlibc's etos port does not implement
-  `sys_getentropy` yet, so `std::random` panics, and `HashMap` seeding falls
-  back to a weak address/clock-derived seed rather than aborting.
+- Random data comes from `getentropy`, which mlibc's etos port implements with
+  the CPU's `RDSEED`/`RDRAND` (there is no kernel entropy service). On a CPU or
+  hypervisor without them (QEMU's default `qemu64` CPU has neither; `-cpu host`
+  or `max` do) `std::random` panics, and `HashMap` seeding falls back to a weak
+  address/clock-derived seed rather than aborting.
 - Panics unwind (`panic=unwind` is the default) and `catch_unwind` works, and
   `std::backtrace` captures frames. Symbol names need debug info or a symbol
   table, which the etos build strips; mlibc also prints a missing-sysdep notice

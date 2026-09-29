@@ -1,13 +1,14 @@
 //! Random data generation through `getentropy`, with a degraded fallback for
 //! `HashMap` seeding.
 //!
-//! mlibc's `getentropy` needs the platform to supply `sys_getentropy`, which
-//! etos does not do yet, so it currently fails with `ENOSYS`. `fill_bytes`
-//! (the unstable `std::random` API) must not hand out predictable data, so it
-//! keeps `getentropy`'s contract and panics on failure. `hashmap_random_keys`
-//! is different: every `HashMap::new()` calls it, and a program that never
-//! asked for randomness must not die for want of an entropy source, so it falls
-//! back to a weak seed. That only weakens HashDoS resistance, not correctness.
+//! mlibc's etos port implements `getentropy` with the CPU's RDSEED/RDRAND, so
+//! this normally just works. A CPU (or hypervisor) that offers neither makes it
+//! fail with `ENOSYS`, and then the two callers differ. `fill_bytes` (the
+//! unstable `std::random` API) must not hand out predictable data, so it keeps
+//! `getentropy`'s contract and panics on failure. `hashmap_random_keys` is
+//! different: every `HashMap::new()` calls it, and a program that never asked
+//! for randomness must not die for want of an entropy source, so it falls back
+//! to a weak seed. That only weakens HashDoS resistance, not correctness.
 
 use crate::ptr;
 
