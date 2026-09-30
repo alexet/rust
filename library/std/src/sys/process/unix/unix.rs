@@ -424,6 +424,7 @@ impl Command {
     }
 
     #[cfg(not(any(
+        target_os = "etos",
         target_os = "freebsd",
         target_os = "illumos",
         all(target_os = "linux", target_env = "gnu"),
@@ -444,6 +445,7 @@ impl Command {
     // Only support platforms for which posix_spawn() can return ENOENT
     // directly.
     #[cfg(any(
+        target_os = "etos",
         target_os = "freebsd",
         target_os = "illumos",
         all(target_os = "linux", target_env = "gnu"),
