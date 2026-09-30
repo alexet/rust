@@ -154,7 +154,7 @@ dependencies = [
 [[package]]
 name = "libc"
 version = "0.2.189"
-source = "git+https://github.com/alexet/rust-libc?branch=etos#dcb9ba807d26a0238358a1d32c13be022ac00663"
+source = "git+https://github.com/alexet/rust-libc?branch=etos#157f8bd3c5c3159fc1bfcfe57a20624a5eddf708"
 dependencies = [
  "rustc-std-workspace-core",
 ]
